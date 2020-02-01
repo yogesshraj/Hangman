@@ -111,7 +111,7 @@ def hangman(secret_word):
             elif y=="hard":
                 remaining_lives-=3
             else:
-                print "oombi pundachi mona crt ah type pannu la thevidiya"
+                print "Spell it correctly in difficulty input!"
     print "The secret word is "+secret_word
 # Load the list of words into the variable wordlist
 # So that it can be accessed from anywhere in the program
