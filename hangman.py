@@ -2,36 +2,16 @@ import string
 from words import choose_word
 from images import IMAGES
 
-# End of helper code
-# -----------------------------------
-
 def is_word_guessed(secret_word, letters_guessed):
-    '''
-    secret_word: ek string word jo ki user ko guess karna hai
-    letters_guessed: ek list hai, jisme wo letters hai jo ki user nai abhi tak guess kare hai
-    returns: return True kare agar saare letters jo ki user ne guess kiye hai wo secret_word mai hai, warna no
-      False otherwise
-    '''
     a=True
     for i in secret_word:
         if i in letters_guessed:
             pass
         else:
             a=False
-
-
     return a
 
-# Iss function ko test karne ke liye aap get_guessed_word("kindness", [k, n, d]) call kar sakte hai
 def get_guessed_word(secret_word, letters_guessed):
-    '''
-    secret_word: ek string word jo ki user ko guess kar raha hai
-    letters_guessed: ek list hai, jisme wo letters hai jo ki user nai abhi tak guess kare hai
-    returns: ek string return karni hai jisme wo letters ho jo sahi guess huye ho and baki jagah underscore ho.
-    eg agar secret_word = "kindness", letters_guessed = [k,n, s]
-    to hum return karenge "k_n_n_ss"
-    '''
-
     index = 0
     guessed_word = ""
     while (index < len(secret_word)):
@@ -44,12 +24,6 @@ def get_guessed_word(secret_word, letters_guessed):
 
 
 def get_available_letters(letters_guessed):
-    '''
-    letters_guessed: ek list hai, jisme wo letters hai jo ki user nai abhi tak guess kare hai
-    returns: string, hame ye return karna hai ki kaun kaun se letters aapne nahi guess kare abhi tak
-    eg agar letters_guessed = ['e', 'a'] hai to humme baki charecters return karne hai
-    jo ki `bcdfghijklmnopqrstuvwxyz' ye hoga
-    '''
     import string
     letters_left = string.ascii_lowercase
     going=""
@@ -58,27 +32,14 @@ def get_available_letters(letters_guessed):
             pass
         else:
             going+=letter
-
     return going
 
 def hangman(secret_word):
-    '''
-    secret_word: string, the secret word to guess.
-    Hangman game yeh start karta hai:
-    * Game ki shuruaat mei hi, user ko bata dete hai ki
-      secret_word mei kitne letters hai
-    * Har round mei user se ek letter guess karne ko bolte hai
-    * Har guess ke baad user ko feedback do ki woh guess uss
-      word mei hai ya nahi
-    * Har round ke baar, user ko uska guess kiya hua partial word
-      display karo, aur underscore use kar kar woh letters bhi dikhao
-      jo user ne abhi tak guess nahi kiye hai
-    '''
     print secret_word
     print "Welcome to the game, Hangman!"
     print "I am thinking of a word that is " + str(len(secret_word)) + " letters long."
     print ""
-    y=raw_input("Select the difficulty level(easy,medium,hard): ")
+    y=raw_input("Select the difficulty level[remaining lives will be adjusted accordance with your choice](easy,medium,hard): ")
 
     letters_guessed = []
     remaining_lives=8
@@ -106,15 +67,17 @@ def hangman(secret_word):
             print ""
             if y=="easy":
                 remaining_lives-=1
+                print "Your remaining lives are: ",remaining_lives
             elif y=="medium":
                 remaining_lives-=2
+                print "Your remaining lives are: ",remaining_lives
             elif y=="hard":
                 remaining_lives-=3
+                print "Your remaining lives are: ",remaining_lives
             else:
-                print "Spell it correctly in difficulty input!"
+                print "Spell it correctly in difficulty input"
+                break
     print "The secret word is "+secret_word
-# Load the list of words into the variable wordlist
-# So that it can be accessed from anywhere in the program
-
 secret_word = choose_word()
 hangman(secret_word)
+
